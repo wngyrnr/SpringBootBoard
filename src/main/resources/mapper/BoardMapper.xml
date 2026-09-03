@@ -1,0 +1,5 @@
+<select id="findAll" resultType="com.example.tester.boardList.BoardPageResponseDto">
+    SELECT board_id, category, title, created_at
+    FROM board_table
+    ORDER BY board_id DESC
+</select>
