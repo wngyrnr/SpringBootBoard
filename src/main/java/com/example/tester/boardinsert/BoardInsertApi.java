@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.*;
     @RestController
     @RequestMapping("/board")
     public class BoardInsertApi {
+
         @Autowired
-        private BoardMapper boardMapper;
+        private BoardInsertMapper boardinsertmapper;
 
 
 
         @PostMapping("/write")
         public Long insertBoard(@RequestBody BoardInsertDto boardInsertDto) {
-            boardMapper.insert(boardInsertDto);
+            boardinsertmapper.insert(boardInsertDto);
             return boardInsertDto.getBoardId();
         }
     }
@@ -33,7 +34,7 @@ import org.springframework.web.bind.annotation.*;
     }
 
     @Mapper
-    interface BoardMapper{
+    interface BoardInsertMapper{
         int insert(BoardInsertDto dto);
 
     }

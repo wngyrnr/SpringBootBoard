@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.tester.boardinsert.BoardMapper">
+<mapper namespace="com.example.tester.boardselect.BoardListMapper">
 
-<select id="findAll">
-    SELECT category, title ,write, created_at
+<!--
+    list로 반환받고 싶을 때
+    Mapper의 메서드의 리턴 타입을 list<dto함수명>로 선언
+    sql이 여러행을 반환할 때 MyBatis가 각 행마다 BoardListDto 인스턴스를 자동으로 리스트에 담음
+-->
+<select id="findAll" resultType="com.example.tester.boardselect.BoardListDto">
+    SELECT category, title ,writer, created_at
     FROM board_table
     ORDER BY created_at DESC
 </select>
