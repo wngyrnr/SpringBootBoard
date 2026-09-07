@@ -28,11 +28,7 @@ public class BoardUpdateApi {
         boardupatemapper.update(boardupdatedto);
         return boardupdatedto.getBoardId();
     }
-
-
-
 }
-
     @Getter
     @Setter
     @AllArgsConstructor
@@ -43,8 +39,6 @@ public class BoardUpdateApi {
         private String content;
         private String Writer;
     }
-
-
     @Mapper
     interface BoardUpateMapper{
         int update(BoardUpdateDto dto);

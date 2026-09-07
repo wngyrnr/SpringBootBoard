@@ -86,11 +86,4 @@ import org.springframework.web.bind.annotation.*;
 
 
 
-    // 글 삭제
-    // delete
 
-    // 게시글 상세 이동
-    // select 게시글
-    // 삭제 delete
-    // 해당 게시글 delete
-    //게시글 hard delete
