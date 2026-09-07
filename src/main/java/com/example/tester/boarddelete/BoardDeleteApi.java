@@ -14,7 +14,7 @@ public class BoardDeleteApi {
 
 
     @DeleteMapping("/{boardId}")
-    public long deleteBoard(@PathVariable Long boardId) {
+    public long deleteBoard(Long boardId) {
         boarddeletemapper.deleteBoard(boardId);
         return boardId;
     }
