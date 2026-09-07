@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -32,14 +31,16 @@ public class BoardSelectApi {
         return boardlist;
     }
 }
-    @Getter
-    @AllArgsConstructor
-    class BoardListDto{
-        private String category;
-        private String title;
-        private String writer;
-        private LocalDateTime createAt;
-    }
+
+
+@Getter
+@AllArgsConstructor
+class BoardListDto{
+    private String category;
+    private String title;
+    private String writer;
+    private LocalDateTime createAt;
+}
 
 @Mapper
 interface BoardListMapper{

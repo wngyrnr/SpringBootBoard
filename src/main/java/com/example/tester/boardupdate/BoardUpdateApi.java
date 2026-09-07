@@ -1,22 +1,41 @@
 package com.example.tester.boardupdate;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
+
+@RestController
+@RequestMapping("/board")
 public class BoardUpdateApi {
+
+    @Autowired
+    private BoardUpateMapper boardupatemapper;
+
+
+
+    @GetMapping("/{boardId}")
+    @ResponseBody
+    public BoardUpdateDto detailBoard(@PathVariable Long boardId) {
+        return boardupatemapper.findselect(boardId);
+    }
+
+    @PostMapping("/edit/{boardId}")
+    Long editBoard(@RequestBody BoardUpdateDto boardupdatedto){
+        boardupatemapper.update(boardupdatedto);
+        return boardupdatedto.getBoardId();
+    }
 
 
 
 }
 
-
-
-
-
-
-
     @Getter
     @Setter
+    @AllArgsConstructor
     class BoardUpdateDto{
         private Long boardId;
         private String category;
@@ -25,9 +44,14 @@ public class BoardUpdateApi {
         private String Writer;
     }
 
+
+    @Mapper
     interface BoardUpateMapper{
-        int insert
+        int update(BoardUpdateDto dto);
+        BoardUpdateDto findselect(Long boardId);
     }
+
+
 
 
 // 게시글 수정

@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.tester.boardinsert.BoardInsertMapper">
+<mapper namespace="com.example.tester.boardupdate.BoardUpateMapper">
 
-    <insert id="insert" useGeneratedKeys="true" keyProperty="boardId">
-        INSERT INTO board_table (writer, category, title, content)
-        VALUES (#{writer}, #{category}, #{title}, #{content})
-    </insert>
+    <update id="update">
+        UPDATE board_table
+        SET writer = #{writer}, category = #{category}, title = #{title}, content = #{content}
+        WHERE board_id = #{boardId}
+    </update>
+
+    <select id="findselect" resultType="com.example.tester.boardupdate.BoardUpdateDto">
+        SELECT board_id,category, title, writer, content, created_at
+        FROM board_table
+        WHERE board_id = #{boardId}
+    </select>
+
 
 </mapper>
