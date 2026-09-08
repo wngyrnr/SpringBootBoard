@@ -1,0 +1,22 @@
+package com.example.tester.board.dto;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import java.time.LocalDateTime;
+
+
+@Getter
+@Setter
+@AllArgsConstructor
+public class BoardFileDto {
+    private Long fileId;
+    private Long boardId;
+    private String fileName;
+    private String originalName;
+    private String filePath;
+    private LocalDateTime createdAt;
+    private Long fileSize;
+    private String fileType;
+}
