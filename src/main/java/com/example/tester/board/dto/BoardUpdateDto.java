@@ -1,11 +1,16 @@
-package com.example.tester.boardinsert.dto;
+package com.example.tester.board.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+
+@ToString
 @Getter
 @Setter
-public class BoardInsertDto {
+@AllArgsConstructor
+public class BoardUpdateDto {
     private Long boardId;
     private String category;
     private String title;

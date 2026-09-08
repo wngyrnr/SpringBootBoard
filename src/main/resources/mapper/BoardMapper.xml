@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.tester.boardList.mapper.BoardListMapper">
+<mapper namespace="com.example.tester.board.mapper.BoardMapper">
 
-<!--
-    list로 반환받고 싶을 때
-    Mapper의 메서드의 리턴 타입을 list<dto함수명>로 선언
-    sql이 여러행을 반환할 때 MyBatis가 각 행마다 BoardListDto 인스턴스를 자동으로 리스트에 담음
--->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="boardId">
+        INSERT INTO board_table (writer, category, title, content)
+        VALUES (#{writer}, #{category}, #{title}, #{content})
+    </insert>
+
+    <update id="update">
+        UPDATE board_table
+        SET writer = #{writer}, category = #{category}, title = #{title}, content = #{content}
+        WHERE board_id = #{boardId}
+    </update>
+
     <sql id="searchCondition">
         <if test="keyword != null and keyword != ''">
             <choose>
@@ -28,7 +34,7 @@
         </if>
     </sql>
 
-    <select id="findByPage" resultType="com.example.tester.boardList.dto.BoardListDto">
+    <select id="findByPage" resultType="com.example.tester.board.dto.BoardListDto">
         SELECT category, title, writer, created_at
         FROM board_table
         <where>
@@ -46,6 +52,15 @@
         </where>
     </select>
 
+    <select id="findselect" resultType="com.example.tester.board.dto.BoardUpdateDto">
+        SELECT board_id,category, title, writer, content, created_at
+        FROM board_table
+        WHERE board_id = #{boardId}
+    </select>
+
+    <delete id="deleteBoard" parameterType="long">
+        DELETE FROM board_table WHERE board_id = #{boardId}
+    </delete>
 
 
 </mapper>
