@@ -13,6 +13,7 @@ public class BoardDeleteController {
 
     @DeleteMapping("/delete/{boardId}")
     public Long deleteBoard(@PathVariable Long boardId) {
-        return boardDeleteService.deleteBoard(boardId);
+        boardDeleteService.deleteBoard(boardId);
+        return boardId;
     }
 }
