@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.tester.boardselect.mapper.BoardListMapper">
+<mapper namespace="com.example.tester.boardList.mapper.BoardListMapper">
 
 <!--
     list로 반환받고 싶을 때
     Mapper의 메서드의 리턴 타입을 list<dto함수명>로 선언
     sql이 여러행을 반환할 때 MyBatis가 각 행마다 BoardListDto 인스턴스를 자동으로 리스트에 담음
 -->
-<select id="findAll" resultType="com.example.tester.boardselect.dto.BoardListDto">
+<select id="findByPage" resultType="com.example.tester.boardList.dto.BoardListDto">
     SELECT category, title ,writer, created_at
     FROM board_table
     ORDER BY created_at DESC
+    LIMIT #{size} OFFSET #{offset}
+</select>
+
+<select id="countAll" resultType="int">
+    SELECT COUNT(*)
+    FROM board_table
 </select>
 
 </mapper>

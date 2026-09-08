@@ -1,4 +1,4 @@
-package com.example.tester.boardselect.dto;
+package com.example.tester.boardList.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
