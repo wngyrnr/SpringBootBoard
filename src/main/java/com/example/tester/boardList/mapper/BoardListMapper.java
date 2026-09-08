@@ -8,6 +8,10 @@ import java.util.List;
 
 @Mapper
 public interface BoardListMapper{
-    List<BoardListDto> findByPage(@Param("offset")int offset,@Param("size") int size);
-    int countAll();
+    List<BoardListDto> findByPage(@Param("offset")int offset,
+                                  @Param("size") int size,
+                                  @Param("keyword")String keyword,
+                                  @Param("searchType")String searchType);
+    long countAll(@Param("keyword")String keyword,
+                 @Param("searchType")String searchType);
 }

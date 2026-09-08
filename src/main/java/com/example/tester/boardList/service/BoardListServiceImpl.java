@@ -16,11 +16,11 @@ public class BoardListServiceImpl implements BoardListService {
     private BoardListMapper boardlistmapper;
 
     @Override
-    public BoardListResponseDto boardList(int page, int size) {
+    public BoardListResponseDto boardList(int page, int size , String keyword, String searchtype) {
         int offset = (page -1) * size;
 
-        List<BoardListDto> content = boardlistmapper.findByPage(offset,size);
-        long totalElements = boardlistmapper.countAll();
+        List<BoardListDto> content = boardlistmapper.findByPage(offset,size,keyword,searchtype);
+        long totalElements = boardlistmapper.countAll(keyword,searchtype);
         int totalPage = (int) Math.ceil((double) totalElements / size);
 
 

@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-@Controller
 @RestController
 @RequestMapping("/board")
 public class BoardListController {
@@ -19,10 +18,10 @@ public class BoardListController {
 
     @GetMapping("/list")
     public BoardListResponseDto list(@RequestParam(defaultValue = "1") int page,
-                                     @RequestParam(defaultValue = "10") int size){
-        return boardselectservice.boardList(page, size);
+                                     @RequestParam(defaultValue = "10") int size,
+                                     @RequestParam(required = false)String keyword,
+                                     @RequestParam(required = false)String searchtype){
+        return boardselectservice.boardList(page, size, keyword,searchtype);
     }
-
-
 
 }

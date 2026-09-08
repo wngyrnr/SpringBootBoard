@@ -7,16 +7,45 @@
     Mapper의 메서드의 리턴 타입을 list<dto함수명>로 선언
     sql이 여러행을 반환할 때 MyBatis가 각 행마다 BoardListDto 인스턴스를 자동으로 리스트에 담음
 -->
-<select id="findByPage" resultType="com.example.tester.boardList.dto.BoardListDto">
-    SELECT category, title ,writer, created_at
-    FROM board_table
-    ORDER BY created_at DESC
-    LIMIT #{size} OFFSET #{offset}
-</select>
+    <sql id="searchCondition">
+        <if test="keyword != null and keyword != ''">
+            <choose>
+                <when test="searchType == 'title'">
+                    title LIKE CONCAT('%', #{keyword}, '%')
+                </when>
+                <when test="searchType == 'content'">
+                    content LIKE CONCAT('%', #{keyword}, '%')
+                </when>
+                <when test="searchType == 'writer'">
+                    writer LIKE CONCAT('%', #{keyword}, '%')
+                </when>
+                <otherwise>
+                    (title LIKE CONCAT('%', #{keyword}, '%')
+                    OR content LIKE CONCAT('%', #{keyword}, '%')
+                    OR writer LIKE CONCAT('%', #{keyword}, '%'))
+                </otherwise>
+            </choose>
+        </if>
+    </sql>
 
-<select id="countAll" resultType="int">
-    SELECT COUNT(*)
-    FROM board_table
-</select>
+    <select id="findByPage" resultType="com.example.tester.boardList.dto.BoardListDto">
+        SELECT category, title, writer, created_at
+        FROM board_table
+        <where>
+            <include refid="searchCondition"/>
+        </where>
+        ORDER BY created_at DESC
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <select id="countAll" resultType="long">
+        SELECT COUNT(*)
+        FROM board_table
+        <where>
+            <include refid="searchCondition"/>
+        </where>
+    </select>
+
+
 
 </mapper>
